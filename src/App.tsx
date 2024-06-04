@@ -2,15 +2,21 @@ import React from 'react';
 import './App.css';
 
 export const App: React.FC = () => {
+	const [toggleActive, setToggleActive] = React.useState(false);
+
+	const handleClick = () => {
+		setToggleActive(prev => !prev);
+	}
+
 	return (
 		<div className="todo">
 			<div className="todo__sidebar">
 				<ul className="sidebar__list">
-					<li className="list__item all-todos">
+					<li onClick={handleClick} className={`list__item all-todos ${toggleActive ? 'active' : ''}`}>
 						<img src="./svg/list.svg" alt="List icon" />
 						<p>Все задачи</p>
 					</li>
-					<li className="list__item todo__folders">
+					<li onClick={handleClick} className={`list__item todo__folders`}>
 						<svg
 							width="10"
 							height="10"

@@ -1,0 +1,54 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	font-family: 'Roboto', system-ui, sans-serif;
+	padding: 0;
+	margin: 0;
+	color: #000000;
+}
+
+.todo {
+	display: flex;
+	width: 750px;
+	height: 530px;
+	box-shadow: 1px 2px 20px #f3f3f3;
+	border: 1px solid #f1f1f1;
+}
+
+.todo__sidebar {
+	background-color: #f4f6f8;
+	width: 200px;
+	height: 100%;
+	border-right: 1px solid #f1f1f1;
+	padding: 57px 20px;
+}
+
+.sidebar__list {
+	list-style: none;
+}
+
+.list__item {
+	padding: 10px 10px 10px 12px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.list__item.active {
+	border-radius: 4px;
+	box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.03);
+	background: rgb(255, 255, 255);
+}
+
+.list__item.all-todos {
+	font-weight: 500;
+	font-size: 16px;
+	gap: 6px;
+}
+
+.list__item.todo__folders {
+	font-size: 14px;
+	font-weight: 600;
+	gap: 10px;
+}

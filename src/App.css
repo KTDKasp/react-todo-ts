@@ -24,49 +24,4 @@
 	padding: 57px 20px;
 }
 
-.sidebar__list {
-	list-style: none;
-}
 
-.list__item {
-	padding: 10px 10px 10px 12px;
-	display: flex;
-	align-items: center;
-	cursor: pointer;
-}
-
-.list__item p {
-	text-wrap: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-
-.list__item.active {
-	border-radius: 4px;
-	box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.04);
-	background: rgb(255, 255, 255);
-}
-
-.list__item.all-todos {
-	font-weight: 500;
-	font-size: 16px;
-	margin-bottom: 30px;
-	gap: 6px;
-}
-
-.list__item.todo__folders {
-	font-size: 14px;
-	font-weight: 600;
-}
-
-.list__item.list__item.todo__folders p {
-	margin-left: 15px;
-}
-
-.badge {
-	min-width: 10px;
-	min-height: 10px;
-	border-radius: 50%;
-	position: relative;
-	left: 4px;
-}

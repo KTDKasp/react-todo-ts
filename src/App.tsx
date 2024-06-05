@@ -18,10 +18,16 @@ const todoListItems: ITodoListItems[] = [
 
 export const App: React.FC = () => {
 
+	const [todos, setTodos] = React.useState<ITodoListItems[]>([]);
+
+	React.useEffect(() => {
+		setTodos(todoListItems);
+	}, [])
+
 	return (
 		<div className="todo">
 			<div className="todo__sidebar">
-				<SidebarList items={todoListItems} />
+				<SidebarList items={todos} />
 			</div>
 			<div className="todo__tasks">
 				<button>btn</button>

@@ -1,0 +1,127 @@
+.add__todo-folder {
+	display: flex;
+	border: none;
+	background: none;
+	cursor: pointer;
+	padding: 10px 10px 10px 12px;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 500;
+	width: 100%;
+	border-radius: 4px;
+	transition: background-color 0.2s ease;
+}
+
+.add__todo-folder:hover {
+	background-color: #FFFFFF;
+}
+
+.add__todo-folder:hover p {
+	color: #000000;
+}
+
+.icon-badge {
+	position: relative;
+	min-width: 10px;
+	min-height: 10px;
+	left: 3px;
+}
+
+.add__todo-folder p {
+	margin-left: 13px;
+	color: #767676;
+	transition: color 0.2s ease;
+}
+
+.add__folder-popup {
+  position: relative;
+  padding: 18px 18px 15px 18px;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.05);
+  background: #fff;
+  border-radius: 10px;
+  min-width: 235px;
+  top: 5px;
+  left: 11px;
+}
+
+.close__popup {
+  position: absolute;
+  cursor: pointer;
+  border: none;
+  background: none;
+  top: -7px;
+  right: -7px;
+}
+
+.folder__name {
+  font-weight: 400;
+  letter-spacing: 0.01rem;
+  font-size: 14px;
+  color: #000000;
+  border: 1px solid #efefef;
+  border-radius: 4px;
+  width: 200px;
+  background-color: #ffffff;
+  padding: 8px 10px;
+  margin-bottom: 13px;
+}
+
+.folder__name:focus {
+  outline: #c1c1c1 solid 1px;
+}
+
+.folder__name::placeholder {
+  color: #c7c7c7;
+}
+
+.choose__color {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 13px;
+}
+
+.color__list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.color {
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.color.active {
+  border: #525252 solid 2px;
+}
+
+.color__palette {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.color__palette img {
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.add__folder {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  border: none;
+  color: #ffffff;
+  background-color: #4dd599;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 4px;
+}

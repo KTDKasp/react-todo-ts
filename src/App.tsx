@@ -1,34 +1,27 @@
 import React from 'react';
+
+import { SidebarList } from './components/SidebarList';
+
 import './App.css';
 
-export const App: React.FC = () => {
-	const [toggleActive, setToggleActive] = React.useState(false);
+export interface ITodoListItems {
+	color: string;
+	name: string;
+}
 
-	const handleClick = () => {
-		setToggleActive(prev => !prev);
-	}
+const todoListItems: ITodoListItems[] = [
+	{color: '#42B883', name: 'Покупки'},
+	{color: '#64C4ED', name: 'Фронтенд'},
+	{color: '#FFBBCC', name: 'Фильмы и сериалы'},
+	{color: '#B6E6BD', name: 'Книги'},
+]
+
+export const App: React.FC = () => {
 
 	return (
 		<div className="todo">
 			<div className="todo__sidebar">
-				<ul className="sidebar__list">
-					<li onClick={handleClick} className={`list__item all-todos ${toggleActive ? 'active' : ''}`}>
-						<img src="./svg/list.svg" alt="List icon" />
-						<p>Все задачи</p>
-					</li>
-					<li onClick={handleClick} className={`list__item todo__folders`}>
-						<svg
-							width="10"
-							height="10"
-							viewBox="0 0 10 10"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<circle cx="5" cy="5" r="5" fill="#42B883" />
-						</svg>
-						<p>Покупки</p>
-					</li>
-				</ul>
+				<SidebarList items={todoListItems} />
 			</div>
 			<div className="todo__tasks">
 				<button>btn</button>

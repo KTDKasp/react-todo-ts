@@ -1,23 +1,27 @@
 import React from 'react';
-
 import './AddTodoFolderButton.css';
 
-const colorList: { color: string }[] = [
-  { color: '#FF6464' },
-  { color: '#42B883' },
-  { color: '#64C4ED' },
-  { color: '#FFBBCC' },
-  { color: '#B6E6BD' },
-  { color: '#C355F5' },
-  { color: '#09011A' },
+const colorList: { color: string, id: number }[] = [
+  { color: '#FF6464', id: 1 },
+  { color: '#42B883', id: 2 },
+  { color: '#64C4ED', id: 3 },
+  { color: '#FFBBCC', id: 4 },
+  { color: '#B6E6BD', id: 5 },
+  { color: '#C355F5', id: 6 },
+  { color: '#09011A', id: 7 },
 ];
 
 export const AddTodoFolderButton: React.FC = () => {
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
+  const [selectedColor, setSelectedColor] = React.useState(1);
 
   const handleClick = () => {
     setIsPopupOpen((prev) => !prev);
   };
+
+  const onClickColor = (id: number) => {
+    setSelectedColor(id)
+  }
 
   return (
     <>
@@ -32,16 +36,17 @@ export const AddTodoFolderButton: React.FC = () => {
           </button>
           <form>
             <input
-              className="folder__name"
+              className="input__field"
               type="text"
               placeholder="Название папки"
             />
             <div className="choose__color">
               <ul className="color__list">
-                {colorList.map((item, index) => (
+                {colorList.map((item) => (
                   <li
-                    className="color"
-                    key={index}
+                    onClick={() => onClickColor(item.id)}
+                    className={`color ${selectedColor === item.id ? 'active' : ''}`}
+                    key={item.id}
                     style={{ backgroundColor: item.color }}
                   ></li>
                 ))}

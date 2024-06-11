@@ -1,7 +1,7 @@
 import React from 'react';
 import './AddTodoFolderButton.css';
 
-const colorList: { color: string, id: number }[] = [
+const colorList: { color: string; id: number }[] = [
   { color: '#FF6464', id: 1 },
   { color: '#42B883', id: 2 },
   { color: '#64C4ED', id: 3 },
@@ -11,17 +11,37 @@ const colorList: { color: string, id: number }[] = [
   { color: '#09011A', id: 7 },
 ];
 
-export const AddTodoFolderButton: React.FC = () => {
+export const AddTodoFolderButton: React.FC<{
+  onAddFolder: (obj: { name: string; colorId: number }) => void;
+}> = ({ onAddFolder }) => {
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
   const [selectedColor, setSelectedColor] = React.useState(1);
+  const [inputValue, setInputValue] = React.useState<string>('');
 
   const handleClick = () => {
     setIsPopupOpen((prev) => !prev);
   };
 
   const onClickColor = (id: number) => {
-    setSelectedColor(id)
-  }
+    setSelectedColor(id);
+  };
+
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
+  const onClickAddFolder = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (inputValue) {
+      onAddFolder({ name: inputValue, colorId: selectedColor });
+      console.log({ name: inputValue, colorId: selectedColor });
+      setIsPopupOpen(false);
+      setInputValue('');
+    } else {
+      console.log('Название папки не может быть пустым');
+      return;
+    }
+  };
 
   return (
     <>
@@ -36,6 +56,8 @@ export const AddTodoFolderButton: React.FC = () => {
           </button>
           <form>
             <input
+              value={inputValue}
+              onChange={onChangeInput}
               className="input__field"
               type="text"
               placeholder="Название папки"
@@ -45,7 +67,9 @@ export const AddTodoFolderButton: React.FC = () => {
                 {colorList.map((item) => (
                   <li
                     onClick={() => onClickColor(item.id)}
-                    className={`color ${selectedColor === item.id ? 'active' : ''}`}
+                    className={`color ${
+                      selectedColor === item.id ? 'active' : ''
+                    }`}
                     key={item.id}
                     style={{ backgroundColor: item.color }}
                   ></li>
@@ -55,7 +79,9 @@ export const AddTodoFolderButton: React.FC = () => {
                 <img src="./svg/palette.svg" alt="Palette icon" />
               </button>
             </div>
-            <button className="add__folder">Добавить</button>
+            <button onClick={onClickAddFolder} className="add__folder">
+              Добавить
+            </button>
           </form>
         </div>
       )}

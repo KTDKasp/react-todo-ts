@@ -1,13 +1,14 @@
 import React from 'react';
-import { ITodoListItems } from '../../App';
-import './SidebarList.css';
 import { AddTodoFolderButton } from '../AddTodoFolderButton';
+import './SidebarList.css';
+import { IList } from '../../interfaces/lists.interface';
 
-type SidebarListProps = {
-  items: ITodoListItems[];
-};
+export interface SidebarListProps {
+  items: IList[];
+  onAddFolder: (obj: { name: string, colorId: number }) => void;
+} 
 
-export const SidebarList: React.FC<SidebarListProps> = ({ items }) => {
+export const SidebarList: React.FC<SidebarListProps> = ({ items, onAddFolder }) => {
   const [toggleActive, setToggleActive] = React.useState(false);
 
   const handleClick = () => {
@@ -24,9 +25,9 @@ export const SidebarList: React.FC<SidebarListProps> = ({ items }) => {
         <p>Все задачи</p>
       </button>
       <ul className="sidebar__list">
-        {items.map((item, index) => (
+        {items.map((item) => (
           <li
-            key={index}
+            key={item.id}
             onClick={handleClick}
             className="list__item todo__folders"
           >
@@ -38,7 +39,7 @@ export const SidebarList: React.FC<SidebarListProps> = ({ items }) => {
           </li>
         ))}
       </ul>
-      <AddTodoFolderButton />
+      <AddTodoFolderButton onAddFolder={(obj) => onAddFolder(obj)} />
     </>
   );
 };

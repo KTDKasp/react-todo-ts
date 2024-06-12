@@ -1,6 +1,6 @@
 export interface ITask {
   id: number;
-  listId: number;
+  list_id: number;
   text: string;
   completed: boolean;
 }

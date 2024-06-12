@@ -12,15 +12,11 @@ const colorList: { color: string; id: number }[] = [
 ];
 
 export const AddTodoFolderButton: React.FC<{
-  onAddFolder: (obj: { name: string; colorId: number }) => void;
+  onAddFolder: (obj: { name: string; color_id: number }) => void;
 }> = ({ onAddFolder }) => {
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
   const [selectedColor, setSelectedColor] = React.useState(1);
   const [inputValue, setInputValue] = React.useState<string>('');
-
-  const handleClick = () => {
-    setIsPopupOpen((prev) => !prev);
-  };
 
   const onClickColor = (id: number) => {
     setSelectedColor(id);
@@ -30,13 +26,18 @@ export const AddTodoFolderButton: React.FC<{
     setInputValue(event.target.value);
   };
 
+  const onClosePopup = () => {
+    setIsPopupOpen(false);
+    setInputValue('');
+    setSelectedColor(1);
+  };
+
   const onClickAddFolder = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (inputValue) {
-      onAddFolder({ name: inputValue, colorId: selectedColor });
-      console.log({ name: inputValue, colorId: selectedColor });
-      setIsPopupOpen(false);
-      setInputValue('');
+      onAddFolder({ name: inputValue, color_id: selectedColor });
+      console.log({ name: inputValue, color_id: selectedColor });
+      onClosePopup();
     } else {
       console.log('Название папки не может быть пустым');
       return;
@@ -45,13 +46,13 @@ export const AddTodoFolderButton: React.FC<{
 
   return (
     <>
-      <button className="add__todo-folder" onClick={handleClick}>
+      <button className="add__todo-folder" onClick={() => setIsPopupOpen(true)}>
         <img className="icon-badge" src="./svg/plus-mini.svg" alt="Plus icon" />
         <p>Добавить папку</p>
       </button>
       {isPopupOpen && (
         <div className="add__folder-popup">
-          <button className="close__popup" onClick={handleClick}>
+          <button className="close__popup" onClick={onClosePopup}>
             <img src="./svg/close-black.svg" alt="Close icon" />
           </button>
           <form>

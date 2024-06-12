@@ -8,70 +8,86 @@ import { ITask } from './interfaces/tasks.interface';
 import { IColor } from './interfaces/colors.interface';
 
 import './App.css';
+import { TasksList } from './components/TasksList';
 
 export const App: React.FC = () => {
-	const [lists, setLists] = React.useState<IList[]>([]);
-	const [tasks, setTasks] = React.useState<ITask[]>([]);
-	const [colors, setColors] = React.useState<IColor[]>([]);
+  const [lists, setLists] = React.useState<IList[]>([]);
+  const [tasks, setTasks] = React.useState<ITask[]>([]);
+  const [colors, setColors] = React.useState<IColor[]>([]);
+  const [activeList, setActiveList] = React.useState<IList>({} as IList);
 
-	React.useEffect(() => {
-		const fetchLists = async () => {
-			try {
-				const { data } = await axios.get<IList[]>(LISTS_PREFIX);
-				setLists(data);
-			} catch (e) {
-				console.error(e);
-			}
-		};
-		fetchLists();
-	}, [])
+  React.useEffect(() => {
+    const fetchLists = async () => {
+      try {
+        const { data } = await axios.get(`${LISTS_PREFIX}?_relations=colors`);
+        console.log(data);
 
-	React.useEffect(() => {
-		const fetchTasks = async () => {
-			try {
-				const { data } = await axios.get<ITask[]>(TASKS_PREFIX);
-				setTasks(data);
-			} catch (e) {
-				console.error(e);
-			}
-		};
-		fetchTasks();
-	}, [])
+        setLists(data);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchLists();
+  }, []);
 
-	React.useEffect(() => {
-		const fetchColors = async () => {
-			try {
-				const { data } = await axios.get<IColor[]>(COLORS_PREFIX);
-				setColors(data);
-			} catch (e) {
-				console.error(e);
-			}
-		};
-		fetchColors();
-	}, [])
+  React.useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const { data } = await axios.get<ITask[]>(TASKS_PREFIX);
+        setTasks(data);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchTasks();
+  }, []);
 
-	const onAddFolder = async (obj: { name: string, colorId: number }) => {
-		const { data } = await axios.post(LISTS_PREFIX, obj);
-		setLists(prev => [...prev, data]);
-	}
+  React.useEffect(() => {
+    const fetchColors = async () => {
+      try {
+        const { data } = await axios.get<IColor[]>(COLORS_PREFIX);
+        setColors(data);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchColors();
+  }, []);
 
-	return (
-		<div className="todo">
-			<div className="todo__sidebar">
-				<SidebarList onAddFolder={onAddFolder} items={
-					lists.map(list => {
-						list.color = colors.find(color => color.id === list.colorId)?.hex || '';
-						return list
-					})
-				} />
-			</div>
-			<div className="todo__tasks">
-				{
-					tasks.map(task => (
-						<div key={task.id}>{task.text}</div>
-					))
-				}
-			</div>
-		</div>
-	);
+  const onAddFolder = async (obj: { name: string; color_id: number }) => {
+    const { data } = await axios.post(LISTS_PREFIX, {
+      ...obj,
+      color: colors.find((color) => color.id === obj.color_id),
+    });
+    setLists((prev) => [...prev, data]);
+  };
+
+  const onRemoveFolder = async (id: number) => {
+    setLists((prev) => prev.filter((list) => list.id !== id));
+    await axios.delete(`${LISTS_PREFIX}/${id}`);
+  };
+
+  const taskListCheck = (id: number) => {
+    const taskList = lists.find(list => list.id === id);
+    if (taskList) {
+      setActiveList(taskList);
+    }
+  }
+
+  // #TODO: Исправить поведение тасков при первом рендере
+  return (
+    <div className="todo">
+      <div className="todo__sidebar">
+        <SidebarList
+          onAddFolder={onAddFolder}
+          items={lists}
+          onRemove={(id: number) => onRemoveFolder(id)}
+          taskList={(id: number) => taskListCheck(id)}
+        />
+      </div>
+      <div className="todo__tasks">
+        <TasksList tasks={tasks} list={activeList} />
+      </div>
+    </div>
+  );
 };

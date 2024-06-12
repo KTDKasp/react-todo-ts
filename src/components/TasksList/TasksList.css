@@ -1,0 +1,104 @@
+.tasks__header {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f2f2f2;
+  margin-bottom: 30px;
+}
+
+.tasks__title {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+}
+
+.tasks__title-edit {
+  margin-top: 6px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  min-width: 15px;
+  max-height: 15px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tasks__header:hover .tasks__title-edit {
+  opacity: 1;
+}
+
+.tasks__items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tasks__item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.checkbox__input {
+  display: none;
+}
+
+.checkbox__input:checked + .checkbox__label {
+  background-color: #4DD599;
+  border-color: #4DD599;
+}
+
+.checkbox__input:checked + .checkbox__label svg {
+  opacity: 1;
+}
+
+.checkbox__input:checked + .checkbox__label svg path {
+  stroke: #ffffff;
+}
+
+.checkbox__label:hover {
+  background-color: #f2f2f2;
+  border-color: #f2f2f2;
+}
+
+.checkbox__label:hover svg {
+  opacity: 1;
+}
+
+.checkbox__label:hover svg path {
+  stroke: #b3b3b3;
+}
+
+.checkbox__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e8e8e8;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.checkbox__label svg {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.checkbox__label svg path {
+  stroke: #f2f2f2;
+}
+
+.tasks__item-text {
+  margin-left: 15px;
+  font-weight: 500;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  flex: 1;
+  border: none;
+  background: none;
+  outline: none;
+}

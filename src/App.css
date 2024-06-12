@@ -22,6 +22,14 @@
 	height: 100%;
 	border-right: 1px solid #f1f1f1;
 	padding: 57px 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.todo__tasks {
+	flex: 1;
+	padding: 57px;
+	width: 546px;
 }
 
 

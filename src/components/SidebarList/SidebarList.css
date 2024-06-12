@@ -1,6 +1,7 @@
 .sidebar__list {
 	list-style: none;
 	margin-bottom: 27px;
+	overflow: overlay;
 }
 
 .all-todos {
@@ -20,7 +21,12 @@
 }
 
 .all-todos:hover {
-	background-color: #FFFFFF;
+	background: rgba(255, 255, 255, 0.6);
+}
+
+.all-todos.active {
+	background: #FFFFFF;
+	cursor: default;
 }
 
 .list__item {
@@ -28,6 +34,10 @@
 	display: flex;
 	align-items: center;
 	cursor: pointer;
+	font-size: 14px;
+	font-weight: 600;
+	border-radius: 4px;
+	transition: background-color 0.2s ease;
 }
 
 .list__item:hover {
@@ -38,21 +48,14 @@
 	text-wrap: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	margin-left: 15px;
+	flex: 1;
 }
 
 .list__item.active {
-	border-radius: 4px;
 	box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.04);
 	background: rgb(255, 255, 255);
-}
-
-.list__item.todo__folders {
-	font-size: 14px;
-	font-weight: 600;
-}
-
-.list__item.todo__folders p {
-	margin-left: 15px;
+	cursor: default;
 }
 
 .badge {
@@ -61,6 +64,12 @@
 	border-radius: 50%;
 	position: relative;
 	left: 4px;
+}
+
+.list__remove-item {
+	cursor: pointer;
+	background: none;
+	border: none;
 }
 
 
